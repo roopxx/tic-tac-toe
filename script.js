@@ -164,6 +164,12 @@ play_btn.addEventListener("click", () => {
   let player1_name = document.querySelector("#player_one").value;
   let player2_name = document.querySelector("#player_two").value;
 
+  // Handling players without names
+  if (player1_name.trim() === "" || player2_name.trim() === "") {
+    alert("Please enter names for both players.");
+    return;
+  }
+
   var gameDisplay = document.querySelector(".gameplay");
   var playerDisplay = document.querySelector(".player-selection");
   gameDisplay.style.display = "block";

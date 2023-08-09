@@ -9,23 +9,38 @@
   </head>
   <body>
     <h1 class="header">Tic Tac Toe</h1>
+    <div class="gameplay">
+      <div class="message"></div>
+      <div class="final-message"></div>
+      <div class="gameBoard" id="gameBoard">
+        <div class="cell" data-index="0"></div>
+        <div class="cell" data-index="1"></div>
+        <div class="cell" data-index="2"></div>
+        <div class="cell" data-index="3"></div>
+        <div class="cell" data-index="4"></div>
+        <div class="cell" data-index="5"></div>
+        <div class="cell" data-index="6"></div>
+        <div class="cell" data-index="7"></div>
+        <div class="cell" data-index="8"></div>
+      </div>
 
-    <div class="message"></div>
-
-    <div class="gameBoard" id="gameBoard">
-      <div class="cell" data-index="0"></div>
-      <div class="cell" data-index="1"></div>
-      <div class="cell" data-index="2"></div>
-      <div class="cell" data-index="3"></div>
-      <div class="cell" data-index="4"></div>
-      <div class="cell" data-index="5"></div>
-      <div class="cell" data-index="6"></div>
-      <div class="cell" data-index="7"></div>
-      <div class="cell" data-index="8"></div>
+      <section class="controls">
+        <button class="restart">Wanna play again?</button>
+      </section>
     </div>
-
-    <section class="controls">
-      <button class="restart">RESART</button>
+    <section class="player-selection">
+      <div class="selection">
+        <div class="player_one">
+          <label for="player_one" class="form_label">First Player</label>
+          <input type="text" id="player_one" maxlength="15" />
+        </div>
+        <div class="vs">VS</div>
+        <div class="player_two">
+          <label for="player_two" class="form_label">Second Player</label>
+          <input type="text" id="player_two" maxlength="15" />
+        </div>
+        <button class="play_btn">Let's Battle</button>
+      </div>
     </section>
   </body>
 </html>

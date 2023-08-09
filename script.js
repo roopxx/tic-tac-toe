@@ -32,6 +32,7 @@ const gameBoard = (() => {
 const displayController = (() => {
   const cells = document.querySelectorAll(".cell");
   const message = document.querySelector(".message");
+  const finalMessage = document.querySelector(".final-message");
   const restartBtn = document.querySelector(".restart");
 
   const renderBoard = (board) => {
@@ -41,11 +42,22 @@ const displayController = (() => {
   };
 
   const showMessage = (msg) => {
-    message.textContent = msg;
+    message.textContent = msg.charAt(0).toUpperCase() + msg.slice(1);
+  };
+
+  const showWinner = (winner) => {
+    finalMessage.style.display = "flex";
+    finalMessage.textContent = winner.toUpperCase();
+    finalMessage.classList.add("winner");
   };
 
   const clearMessage = () => {
     message.textContent = "";
+  };
+
+  const clearWinner = () => {
+    finalMessage.textContent = "";
+    finalMessage.classList.remove("winner");
   };
 
   const addCellClickListener = (callback) => {
@@ -59,7 +71,9 @@ const displayController = (() => {
   return {
     renderBoard,
     showMessage,
+    showWinner,
     clearMessage,
+    clearWinner,
     addCellClickListener,
     addRestartClickListener,
   };
@@ -73,10 +87,9 @@ const Player = (name, marker) => {
 };
 
 // Gameplay
-
-const game = (() => {
-  const player1 = Player("Player 1", "X");
-  const player2 = Player("Player 2", "O");
+const game = (player1_name, player2_name) => {
+  const player1 = Player(player1_name, "X");
+  const player2 = Player(player2_name, "O");
   let currentPlayer = player1;
   let gameEnded = false;
 
@@ -116,10 +129,12 @@ const game = (() => {
       displayController.renderBoard(gameBoard.getBoard());
 
       if (checkWin(gameBoard.getBoard(), currentPlayer.getMarker())) {
-        displayController.showMessage(`${currentPlayer.getName()} wins!`);
+        displayController.showWinner(`${currentPlayer.getName()} wins!`);
+        displayController.clearMessage();
         gameEnded = true;
       } else if (checkTie(gameBoard.getBoard())) {
-        displayController.showMessage("It's a tie!");
+        displayController.showWinner("It's a tie!");
+        displayController.clearMessage();
         gameEnded = true;
       } else {
         switchPlayer();
@@ -133,6 +148,7 @@ const game = (() => {
     gameEnded = false;
     currentPlayer = player1;
     displayController.clearMessage();
+    displayController.clearWinner();
     displayController.renderBoard(gameBoard.getBoard());
     displayController.showMessage(`${currentPlayer.getName()}'s Turn`);
   };
@@ -140,7 +156,21 @@ const game = (() => {
   displayController.addCellClickListener(handleCellClick);
   displayController.addRestartClickListener(handleRestartClick);
   displayController.showMessage(`${currentPlayer.getName()}'s Turn`);
-})();
+};
 
 // Initialize the game
-displayController.renderBoard(gameBoard.getBoard());
+const play_btn = document.querySelector(".play_btn");
+play_btn.addEventListener("click", () => {
+  let player1_name = document.querySelector("#player_one").value;
+  let player2_name = document.querySelector("#player_two").value;
+
+  var gameDisplay = document.querySelector(".gameplay");
+  var playerDisplay = document.querySelector(".player-selection");
+  gameDisplay.style.display = "block";
+  playerDisplay.style.display = "none";
+
+  // Call the game function with player names
+  (function init() {
+    game(player1_name, player2_name);
+  })();
+});

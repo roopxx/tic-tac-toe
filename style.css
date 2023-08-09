@@ -4,9 +4,49 @@
   padding: 0;
 }
 
+@font-face {
+  font-family: blackops;
+  src: url(Fonts/BlackOpsOne-Regular.ttf);
+}
+
+@font-face {
+  font-family: creepster;
+  src: url(Fonts/Creepster-Regular.ttf);
+}
+
 h1 {
   text-align: center;
   margin: 10px 10px;
+  font-weight: 300;
+  background: radial-gradient(ellipse at bottom, black, transparent, gold);
+  background-position: 50% 100%;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 6rem;
+  font-family: creepster, sans-serif;
+  animation: reveal 3000ms ease-in-out forwards 200ms,
+    glow 2200ms linear infinite 2000ms;
+}
+
+@keyframes reveal {
+  80% {
+    letter-spacing: 10px;
+  }
+  100% {
+    background-size: 300% 300%;
+  }
+}
+
+@keyframes glow {
+  40% {
+    text-shadow: 0 0 8px #ffffff;
+  }
+  80% {
+    text-shadow: 0 8px 4px black;
+  }
 }
 
 .gameBoard {
@@ -18,8 +58,23 @@ h1 {
   margin: 100px auto;
 }
 
+.controls {
+  display: flex;
+  justify-content: center;
+}
+
 .restart {
-  margin: 10px 50vw;
+  display: flex;
+  font-family: creepster, sans-serif;
+  padding: 1rem;
+  font-size: 2rem;
+  background-color: transparent;
+  border: none;
+}
+
+.restart:hover {
+  animation: jump-shaking 0.8s 2;
+  border-radius: 10px;
 }
 
 .cell {
@@ -29,7 +84,7 @@ h1 {
   justify-content: center;
   align-items: center;
   font-size: 2rem;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   cursor: pointer;
 }
 
@@ -51,7 +106,139 @@ h1 {
 
 .message {
   display: flex;
+  font-family: blackops, sans-serif;
   margin-top: 50px;
   justify-content: center;
-  font-size: x-large;
+  font-size: 3rem;
+  color: black;
+}
+
+.final-message {
+  display: none;
+  font-family: creepster, sans-serif;
+  margin-top: 50px;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.winner {
+  color: goldenrod;
+  font-size: 4rem;
+  text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000, 1px 1px #000,
+    -1px -1px #000, 1px -1px #000, -1px 1px #000, gainsboro -5px -15px 2px;
+  transition: ease-out 3s;
+  animation: jump-shaking 2.5s;
+}
+
+.gameplay {
+  display: none;
+}
+
+.player-selection {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.selection {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.player_one,
+.player_two,
+.vs {
+  font-family: creepster, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  min-width: fit-content;
+  font-size: 4rem;
+}
+
+.player_one {
+  color: hsla(358, 100%, 16%, 1);
+}
+
+.player_two {
+  color: hsla(187, 100%, 14%, 1);
+}
+
+.vs {
+  color: hsla(47, 100%, 50%, 1);
+}
+
+input[type="text"] {
+  border: none;
+  border-bottom: 2px gray solid;
+  height: 2rem;
+  width: 15rem;
+  font-family: blackops, sans-serif;
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-bottom: 5px goldenrod groove;
+  width: 70%;
+  color: black;
+  transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.player_one:hover {
+  text-shadow: hsla(47, 0%, 0%, 0.34) 10px 5px 3px;
+  transition: 0.5s ease-in-out;
+}
+
+.player_two:hover {
+  text-shadow: hsla(47, 0%, 0%, 0.34) 10px 5px 3px;
+  transition: 0.5s ease-in-out;
+}
+
+.play_btn {
+  position: absolute;
+  top: 12rem;
+  font-family: creepster, sans-serif;
+  padding: 1rem;
+  font-size: 3rem;
+  margin-right: 30px;
+  background-color: transparent;
+  border: none;
+}
+
+.play_btn:hover {
+  animation: jump-shaking 1s infinite;
+  box-shadow: gray 10px 10px 10px;
+  background-color: black;
+  color: whitesmoke;
+  border-radius: 10px;
+}
+
+@keyframes jump-shaking {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateY(-9px);
+  }
+  35% {
+    transform: translateY(-9px) rotate(17deg);
+  }
+  55% {
+    transform: translateY(-9px) rotate(-17deg);
+  }
+  65% {
+    transform: translateY(-9px) rotate(17deg);
+  }
+  75% {
+    transform: translateY(-9px) rotate(-17deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+  }
 }
